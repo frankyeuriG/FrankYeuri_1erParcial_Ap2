@@ -9,5 +9,5 @@ data class PrestamoEntity(
     val prestamoId: Int?=null,
     val deudor: String,
     val concepto: String,
-    val Monto: Double
+    val monto: Double
 )
