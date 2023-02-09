@@ -20,7 +20,9 @@ fun PrestamoScreen(viewModel: PrestamoViewModel = hiltViewModel()) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         PrestamoBody(viewModel)
-
+        Spacer(modifier = Modifier.padding(8.dp))
+        TituloLista()
+        Spacer(modifier = Modifier.padding(8.dp))
         val uiState by viewModel.uiState.collectAsState()
         PrestamoListScreen(uiState.prestamoList)
     }
@@ -30,28 +32,44 @@ fun PrestamoScreen(viewModel: PrestamoViewModel = hiltViewModel()) {
 @Composable
 fun PrestamoBody(viewModel: PrestamoViewModel) {
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+    ) {
 
+        Text(
+            text = "Deudor",
+            style = MaterialTheme.typography.titleLarge
+        )
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(6.dp),
+                .padding(4.dp),
             value = viewModel.deudor,
             onValueChange = { viewModel.deudor = it },
             label = { Text(text = "Deudor") }
         )
-        OutlinedTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(6.dp),
-            value = viewModel.concepto,
-            onValueChange = { viewModel.concepto = it },
-            label = { Text(text = "Concepto") }
+        Text(
+            text = "Concepto",
+            style = MaterialTheme.typography.titleLarge
         )
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(4.dp),
+            value = viewModel.concepto,
+            onValueChange = { viewModel.concepto = it },
+            label = { Text(text = "Concepto") }
+        )
+        Text(
+            text = "Monto",
+            style = MaterialTheme.typography.titleLarge
+        )
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp),
             value = viewModel.monto,
             onValueChange = { viewModel.monto = it },
             label = { Text(text = "Monto") }
@@ -61,8 +79,8 @@ fun PrestamoBody(viewModel: PrestamoViewModel) {
                 .fillMaxWidth()
                 .padding(8.dp),
             text = { Text(text = "Guardar") },
-            icon = {Icon(imageVector = Icons.Filled.Save, contentDescription = "Save")},
-            onClick = {viewModel.insert()}
+            icon = { Icon(imageVector = Icons.Filled.Save, contentDescription = "Save") },
+            onClick = { viewModel.insert() }
         )
     }
 }
@@ -75,6 +93,15 @@ private fun PrestamoListScreen(prestamoList: List<PrestamoEntity>) {
         }
     }
 }
+
+@Composable
+fun TituloLista() {
+    Text(
+        text = "Lista de Prestamos",
+        style = MaterialTheme.typography.titleLarge
+    )
+}
+
 @Composable
 private fun PrestamoRow(prestamo: PrestamoEntity) {
     Column(
