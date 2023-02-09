@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucne.proj_1erparcial_ap2.data.local.entity.PrestamoEntity
@@ -116,15 +117,16 @@ private fun PrestamoRow(prestamo: PrestamoEntity) {
             Text(
                 text = prestamo.deudor,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.weight(3f)
+                modifier = Modifier.weight(2f)
             )
             Text(
                 text = prestamo.concepto,
                 style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.weight(3f)
+                modifier = Modifier.weight(2f)
             )
             Text(
                 String.format("%.2f", prestamo.monto),
+                style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.End,
                 modifier = Modifier.weight(2f)
             )
