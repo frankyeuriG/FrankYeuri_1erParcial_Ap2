@@ -7,7 +7,6 @@ import androidx.room.Query
 import com.ucne.proj_1erparcial_ap2.data.local.entity.PrestamoEntity
 import kotlinx.coroutines.flow.Flow
 
-
 @Dao
 interface PrestamoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
