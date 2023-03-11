@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ucne.proj_1erparcial_ap2.data.local.entity.PrestamoEntity
+import com.ucne.proj_1erparcial_ap2.data.remote.dto.OcupacionesDto
 
 @Composable
 fun PrestamoScreen(viewModel: PrestamoViewModel = hiltViewModel()) {
@@ -31,11 +32,6 @@ fun PrestamoScreen(viewModel: PrestamoViewModel = hiltViewModel()) {
         TituloBody()
         Spacer(modifier = Modifier.padding(10.dp))
         PrestamoBody(viewModel)
-        Spacer(modifier = Modifier.padding(10.dp))
-        TituloLista()
-        Spacer(modifier = Modifier.padding(10.dp))
-        val uiState by viewModel.uiState.collectAsState()
-        PrestamoListScreen(uiState.prestamoList)
     }
 }
 
@@ -49,7 +45,6 @@ fun TituloBody() {
             .wrapContentSize(Alignment.Center)
     )
 }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrestamoBody(viewModel: PrestamoViewModel) {
@@ -131,60 +126,4 @@ fun PrestamoBody(viewModel: PrestamoViewModel) {
     }
 }
 
-@Composable
-private fun PrestamoListScreen(prestamoList: List<PrestamoEntity>) {
-    LazyColumn {
-        items(prestamoList) { prestamo ->
-            PrestamoRow(prestamo)
-        }
-    }
-}
 
-@Composable
-fun TituloLista() {
-    Text(
-        text = "Lista de Prestamos",
-        fontSize = 35.sp,
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
-    )
-}
-
-@Composable
-private fun PrestamoRow(prestamo: PrestamoEntity) {
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .wrapContentSize(Alignment.Center)
-            .padding(8.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = prestamo.deudor,
-                fontSize = 35.sp,
-                style = MaterialTheme.typography.titleLarge
-            )
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentSize(Alignment.Center)
-        ) {
-            Text(
-                text = prestamo.concepto, style = MaterialTheme.typography.titleLarge
-            )
-            Text(
-                String.format("%.2f", prestamo.monto),
-                fontSize = 35.sp,
-                textAlign = TextAlign.End,
-                modifier = Modifier
-                    .weight(3f)
-                    .fillMaxWidth()
-            )
-        }
-        Divider(Modifier.fillMaxWidth())
-    }
-}
