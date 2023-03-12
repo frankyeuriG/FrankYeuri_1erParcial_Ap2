@@ -2,6 +2,8 @@ package com.ucne.proj_1erparcial_ap2.ui.prestamo
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
@@ -26,10 +28,26 @@ import com.ucne.proj_1erparcial_ap2.data.local.entity.PrestamoEntity
 fun PrestamosListScreen() {
     val viewModel: PrestamoViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
-    PrestamoListBody(uiState.prestamoList)
+
+        Column(Modifier.fillMaxSize()) {
+            Spacer(modifier = Modifier.padding(10.dp))
+            TituloListBody()
+            Spacer(modifier = Modifier.padding(10.dp))
+            PrestamoListBody(uiState.prestamoList)
+        }
+
 }
 
-
+@Composable
+fun TituloListBody() {
+    Text(
+        text = "Lista de prestamos",
+        fontSize = 35.sp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentSize(Alignment.Center)
+    )
+}
 @Composable
 private fun PrestamoListBody(prestamoList: List<PrestamoEntity>) {
     LazyColumn {
